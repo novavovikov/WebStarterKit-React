@@ -10,8 +10,8 @@ const About = ({
             About
 
             {exampleArr.map((item, ndx) => (
-                <div key={ndx}>
-                    {item}
+                <div key={item._id}>
+                    {item.name}
                 </div>
             ))}
         </div>

@@ -10,8 +10,13 @@ const Home = ({
     exampleArr
 }) => {
     const handleButton = function() {
-        let newArr = exampleArr.concat('yep');
-        exampleHandler(newArr)
+        fetch('http://localhost:3012/api/artists')
+            .then(function(response) {
+                response.json().then(function (data) {
+                    console.log(data);
+                    exampleHandler(data)
+                })
+            })
     };
 
     return(

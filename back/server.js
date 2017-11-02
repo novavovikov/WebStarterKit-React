@@ -1,11 +1,11 @@
-//dependencies
 const   express = require('express'),
         bodyParser = require('body-parser'),
-        MongoClient = require('mongodb'),
+        MongoClient = require('mongodb').MongoClient,
         ObjectID = require('mongodb').ObjectID;
 
+let db = require('./db');
+
 //params
-let db;
 const app = express();
 const   BASE_URL = '/api',
         PORT = 3012;
@@ -15,28 +15,13 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-let artists = [
-    {
-        id: 1,
-        name: 'Metallica'
-    },
-    {
-        id: 2,
-        name: 'Iron Maiden'
-    },
-    {
-        id: 3,
-        name: 'Deep Purple'
-    }
-];
-
 app.get(BASE_URL, function (req, res) {
     res.sendStatus(200)
 });
 
 //routes
 app.get(`${BASE_URL}/artists`, function (req, res) {
-    db.collection(`artists`).find().toArray(function (err, docs) {
+    db.get().collection(`artists`).find().toArray(function (err, docs) {
         if (err) {
             console.log(err);
             return res.sendStatus(500);
@@ -46,15 +31,16 @@ app.get(`${BASE_URL}/artists`, function (req, res) {
 });
 
 app.get(`${BASE_URL}/artists/:id`, function (req, res) {
-    db.collection(`artists`).findOne({
-        _id: ObjectID(req.params.id)
-    }, function(err, doc) {
-        if (err) {
-            console.log(err);
-            return res.sendStatus(500);
+    db.get().collection(`artists`).findOne(
+        { _id: ObjectID(req.params.id) },
+        function(err, doc) {
+            if (err) {
+                console.log(err);
+                return res.sendStatus(500);
+            }
+            res.send(doc);
         }
-        res.send(doc);
-    });
+    );
 });
 
 app.post(`${BASE_URL}/artists`, function (req, res) {
@@ -63,7 +49,7 @@ app.post(`${BASE_URL}/artists`, function (req, res) {
             name: req.body.name
         }
 
-        db.collection('artists').insert(artist, function(err, result) {
+        db.get().collection('artists').insert(artist, function(err, result) {
             if (err) {
                 console.log(err);
                 return res.sendStatus(500);
@@ -77,25 +63,35 @@ app.post(`${BASE_URL}/artists`, function (req, res) {
 });
 
 app.put(`${BASE_URL}/artists/:id`, function (req, res) {
-    let artist = artists.find((artist) => artist.id === Number(req.params.id));
-    if (req.body.name) {
-        artist.name = req.body.name;
-        res.sendStatus(200);
-    } else {
-        res.sendStatus(400);
-    }
+    db.get().collection('artists').updateOne(
+        { _id: ObjectID(req.params.id) },
+        { name: req.body.name },
+        function(err, result) {
+            if (err) {
+                console.log(err);
+                return res.sendStatus(500);
+            }
+            res.sendStatus(200);
+        }
+    )
 });
 
 app.delete(`${BASE_URL}/artists/:id`, function (req, res) {
-    artists = artists.filter((artist) => artist.id !== Number(req.params.id));
-    res.sendStatus(200);
+    db.get().collection('artists').deleteOne(
+       { _id: ObjectID(req.params.id)},
+        function (err, result) {
+            if (err) {
+                console.log(err);
+                return res.sendStatus(500);
+            }
+            res.sendStatus(200);
+        }
+    )
 });
 
 //run server
-MongoClient.connect('mongodb://localhost:27017/api', function(err, database) {
+db.connect('mongodb://localhost:27017/api', function(err) {
     if (err) return console.log(err);
-
-    db = database
     app.listen(PORT, function () {
         console.log('API app started');
     });

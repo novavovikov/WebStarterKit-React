@@ -6,12 +6,14 @@
   "scripts": {
     "start": "webpack-dev-server --env development",
     "db": "mongod",
-    "serve": "node server.js",
+    "serve": "nodemon ./back/server.js",
     "build": "webpack --env production"
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  },
   "dependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",

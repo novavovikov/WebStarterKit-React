@@ -15,8 +15,8 @@ const 	webpack = require('webpack'),
 		css = require('./webpack/css');
 
 const PATHS = {
-    	src: path.resolve(__dirname, 'src/app'),
-    	build: path.resolve(__dirname, 'dist')
+    	src: path.resolve(__dirname, 'app/js'),
+    	build: path.resolve(__dirname, 'bundle')
 };
 
 //plugins
@@ -38,7 +38,9 @@ const getPlugins = function () {
 //mongod.cfg_
 const common = merge([
 	{
-		entry: `${PATHS.src}/index.js`,
+		entry: {
+			index: `${PATHS.src}/index.js`
+		},
 		output: {
 			path: PATHS.build,
 			filename: 'js/[name].js'
