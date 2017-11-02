@@ -1,8 +1,11 @@
 const   express = require('express'),
+        path = require('path'),
         bodyParser = require('body-parser'),
         MongoClient = require('mongodb').MongoClient,
         ObjectID = require('mongodb').ObjectID,
         db = require('./db');
+
+
 
 //controllers
 const artistsController = require('./db/controllers/artists');
@@ -16,6 +19,12 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
+app.use(express.static(__dirname + '/public'));
+
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname + '/public/'));
+});
 
 app.get(BASE_URL, function (req, res) {
     res.sendStatus(200)

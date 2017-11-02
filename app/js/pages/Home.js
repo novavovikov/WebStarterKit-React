@@ -10,7 +10,9 @@ const Home = ({
     exampleArr
 }) => {
     const handleButton = function() {
-        fetch('http://localhost:3012/api/artists')
+        let path = '/api/artists';
+        console.log(path);
+        fetch(path)
             .then(function(response) {
                 response.json().then(function (data) {
                     console.log(data);
