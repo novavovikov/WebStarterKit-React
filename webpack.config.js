@@ -16,7 +16,7 @@ const 	webpack = require('webpack'),
 
 const PATHS = {
     	src: path.resolve(__dirname, 'app/js'),
-    	build: path.resolve(__dirname, 'bundle')
+    	build: path.resolve(__dirname, 'static')
 };
 
 //plugins

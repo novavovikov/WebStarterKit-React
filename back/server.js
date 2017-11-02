@@ -1,9 +1,11 @@
 const   express = require('express'),
         bodyParser = require('body-parser'),
         MongoClient = require('mongodb').MongoClient,
-        ObjectID = require('mongodb').ObjectID;
+        ObjectID = require('mongodb').ObjectID,
+        db = require('./db');
 
-let db = require('./db');
+//controllers
+const artistsController = require('./controllers/artists');
 
 //params
 const app = express();
@@ -20,15 +22,7 @@ app.get(BASE_URL, function (req, res) {
 });
 
 //routes
-app.get(`${BASE_URL}/artists`, function (req, res) {
-    db.get().collection(`artists`).find().toArray(function (err, docs) {
-        if (err) {
-            console.log(err);
-            return res.sendStatus(500);
-        }
-        res.send(docs);
-    })
-});
+app.get(`${BASE_URL}/artists`, artistsController.all);
 
 app.get(`${BASE_URL}/artists/:id`, function (req, res) {
     db.get().collection(`artists`).findOne(
