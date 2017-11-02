@@ -35,7 +35,7 @@ const getPlugins = function () {
 		return plugins;
 	};
 
-//mongod.cfg
+//mongod.cfg_
 const common = merge([
 	{
 		entry: `${PATHS.src}/index.js`,
