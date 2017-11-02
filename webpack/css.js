@@ -5,12 +5,12 @@ module.exports = function (paths) {
         module: {
             rules: [
                 {
-                    test: /\.scss$/,
+                    test: /\.styl$/,
                     include: paths,
                     use: ExtractTextPlugin.extract({
                         publicPath: '../',
                         fallback: "style-loader",
-                        use: ["css-loader", "sass-loader"]
+                        use: ["css-loader", "stylus-loader"]
                     })
                 },
                 {
@@ -21,11 +21,11 @@ module.exports = function (paths) {
                         fallback: "style-loader",
                         use: "css-loader"
                     })
-                },
+                }
             ]
         },
         plugins: [
             new ExtractTextPlugin("./css/[name].css"),
         ]
     }
-}
+};

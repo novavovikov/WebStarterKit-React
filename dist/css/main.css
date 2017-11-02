@@ -1,0 +1,14 @@
+* {
+  font: inherit;
+}
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #6f6f6f 6;
+  color: #333;
+  min-width: 320px;
+}

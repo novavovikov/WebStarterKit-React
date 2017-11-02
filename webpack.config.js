@@ -1,5 +1,4 @@
-const webpack = require('webpack'),
-		glob = require('glob'),
+const 	webpack = require('webpack'),
 		path = require('path'),
 		merge = require('webpack-merge'),
 
@@ -7,56 +6,44 @@ const webpack = require('webpack'),
 		WebpackCleanupPlugin  = require('webpack-cleanup-plugin'),
 
 		devServer = require('./webpack/devserver'),
-      jsUglify = require('./webpack/js.uglify'),
+      	jsUglify = require('./webpack/js.uglify'),
 
-      js = require('./webpack/js'),
+      	js = require('./webpack/js'),
 		pug = require('./webpack/pug'),
 		img = require('./webpack/img'),
 		fonts = require('./webpack/fonts'),
 		css = require('./webpack/css');
 
 const PATHS = {
-    	source: path.resolve(__dirname, 'src'),
-    	build: path.resolve(__dirname, 'dist'),
-
-		sourcePages: path.resolve(__dirname, 'src/pages'),
+    	src: path.resolve(__dirname, 'src/app'),
+    	build: path.resolve(__dirname, 'dist')
 };
-
-console.log(PATHS.sourcePages);
-
 
 //plugins
-const plugins = [
-	new WebpackCleanupPlugin(),
-	new webpack.optimize.CommonsChunkPlugin({
-		name: 'common'
-	})
-];
-
-const entryHtmlPlugins = function(entryName) {
-		plugins.push(
+const getPlugins = function () {
+		let plugins = [
+			new WebpackCleanupPlugin(),
 			new HtmlWebpackPlugin({
-				filename: `${entryName}.html`,
-				chunks: [ entryName, 'common'],
-				template: `${PATHS.source}/pages/${entryName}/${entryName}.pug`
+				filename: `index.html`,
+				template: `${PATHS.src}/index.pug`
+			}),
+			new webpack.optimize.CommonsChunkPlugin({
+				name: 'common'
 			})
-		)
-};
+		];
 
-//config
+		return plugins;
+	};
+
+//mongod.cfg
 const common = merge([
 	{
-		entry: glob.sync(PATHS.source + '/pages/**/*.js').reduce(function(obj, el){
-			let entryName = path.parse(el).name;
-			entryHtmlPlugins(entryName);
-			obj[entryName] = el;
-			return obj
-		},{}),
+		entry: `${PATHS.src}/index.js`,
 		output: {
 			path: PATHS.build,
 			filename: 'js/[name].js'
 		},
-		plugins: plugins
+		plugins: getPlugins()
 	},
 	img(),
 	fonts(),
