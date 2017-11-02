@@ -6,16 +6,16 @@ const 	webpack = require('webpack'),
 		WebpackCleanupPlugin  = require('webpack-cleanup-plugin'),
 
 		devServer = require('./webpack/devserver'),
-      	jsUglify = require('./webpack/js.uglify'),
+		jsUglify = require('./webpack/js.uglify'),
 
-      	js = require('./webpack/js'),
+		js = require('./webpack/js'),
 		pug = require('./webpack/pug'),
 		img = require('./webpack/img'),
 		fonts = require('./webpack/fonts'),
 		css = require('./webpack/css');
 
 const PATHS = {
-    	src: path.resolve(__dirname, 'app/js'),
+    	src: path.resolve(__dirname, 'app'),
     	build: path.resolve(__dirname, 'back/public')
 };
 
@@ -39,7 +39,7 @@ const getPlugins = function () {
 const common = merge([
 	{
 		entry: {
-			index: `${PATHS.src}/index.js`
+			index: `${PATHS.src}/js/index.js`
 		},
 		output: {
 			path: PATHS.build,

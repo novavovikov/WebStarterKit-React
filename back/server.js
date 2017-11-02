@@ -1,14 +1,11 @@
-const   express = require('express'),
-        path = require('path'),
-        bodyParser = require('body-parser'),
-        MongoClient = require('mongodb').MongoClient,
-        ObjectID = require('mongodb').ObjectID,
-        db = require('./db');
-
-
-
-//controllers
-const artistsController = require('./db/controllers/artists');
+const   	express = require('express'),
+		  	path = require('path'),
+		  	bodyParser = require('body-parser'),
+		  	MongoClient = require('mongodb').MongoClient,
+		  	ObjectID = require('mongodb').ObjectID,
+		  	db = require('./db'),
+			//controllers
+			artistsController = require('./db/controllers/artists');
 
 //params
 const app = express();
@@ -22,20 +19,22 @@ app.use(bodyParser.urlencoded({
 
 app.use(express.static(__dirname + '/public'));
 
+//routes
 app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname + '/public/'));
+    res.sendFile(path.join(__dirname + '/public'));
 });
 
 app.get(BASE_URL, function (req, res) {
     res.sendStatus(200)
 });
 
-//routes
+//api
 app.get(`${BASE_URL}/artists`, artistsController.all);
 app.get(`${BASE_URL}/artists/:id`, artistsController.findById);
 app.post(`${BASE_URL}/artists`, artistsController.create);
 app.put(`${BASE_URL}/artists/:id`, artistsController.update);
 app.delete(`${BASE_URL}/artists/:id`, artistsController.delete);
+
 
 //run server
 db.connect('mongodb://localhost:27017/api', function(err) {

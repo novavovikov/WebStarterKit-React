@@ -18,7 +18,7 @@
 4. Запуск MongoDB
 
 #### Основные команды
-1. npm start - Запуск dev server. Работает на localhost:9000
-2. npm run serve - Запуск сервера Express. Работает на localhost:3012
-3. npm run db - Запуск базы банных MongoDB
-4. npm run build - Сборка проекта под продакшн
+1. npm start - Запуск dev-server. (http://localhost:9000)
+2. npm run build - Сборка проекта под продакшн (необходимо для боевого сервера)
+3. npm run db - Запуск базы банных MongoDB. Без запуска базы данных боевой сервер выдаст ошибку.
+4. npm run server - Запуск сервера Express. (http://localhost:3012)
