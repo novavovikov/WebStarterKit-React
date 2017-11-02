@@ -15,8 +15,8 @@ const 	webpack = require('webpack'),
 		css = require('./webpack/css');
 
 const PATHS = {
-    	src: path.resolve(__dirname, 'app'),
-    	build: path.resolve(__dirname, 'back/public')
+    	src: path.resolve(__dirname, 'client'),
+    	build: path.resolve(__dirname, 'public')
 };
 
 //plugins

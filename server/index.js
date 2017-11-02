@@ -15,11 +15,11 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, '../public')));
 
 //routes
 app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname + '/public'));
+    res.sendFile(path.join(__dirname, '../public'));
 });
 
 app.get(BASE_URL, function (req, res) {
@@ -33,6 +33,10 @@ app.post(BASE_URL + '/artists', artistsController.create);
 app.put(BASE_URL + '/artists/:id', artistsController.update);
 app.delete(BASE_URL + '/artists/:id', artistsController.delete);
 
+//route
+app.get('*', function (req, res) {
+	res.redirect('/');
+});
 
 //run server
 db.connect('mongodb://localhost:27017/api', function(err) {

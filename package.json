@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --progress --env development",
     "db": "mongod",
-    "server": "nodemon ./back/server.js",
+    "server": "nodemon ./server/index.js",
     "build": "webpack --progress --env production"
   },
   "author": "",
