@@ -24,4 +24,6 @@
 #### Основные команды
 
 1. npm start - Запуск dev server. Работает на localhost:9000
-2. npm build - Сборка проекта под продакшн
+2. npm run serve - Запуск сервера Express
+3. npm run db - Запуск базы банных MongoDB
+4. npm run build - Сборка проекта под продакшн
