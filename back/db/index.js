@@ -1,6 +1,4 @@
-const   MongoClient = require('mongodb').MongoClient,
-        ObjectID = require('mongodb').ObjectID;
-
+const   MongoClient = require('mongodb').MongoClient;
 
 const state = {
     db: null
