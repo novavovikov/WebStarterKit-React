@@ -5,7 +5,7 @@ const   express = require('express'),
         db = require('./db');
 
 //controllers
-const artistsController = require('./controllers/artists');
+const artistsController = require('./db/controllers/artists');
 
 //params
 const app = express();
@@ -23,65 +23,10 @@ app.get(BASE_URL, function (req, res) {
 
 //routes
 app.get(`${BASE_URL}/artists`, artistsController.all);
-
-app.get(`${BASE_URL}/artists/:id`, function (req, res) {
-    db.get().collection(`artists`).findOne(
-        { _id: ObjectID(req.params.id) },
-        function(err, doc) {
-            if (err) {
-                console.log(err);
-                return res.sendStatus(500);
-            }
-            res.send(doc);
-        }
-    );
-});
-
-app.post(`${BASE_URL}/artists`, function (req, res) {
-    if (Object.keys(req.body).length > 0 && req.body.name) {
-        let artist = {
-            name: req.body.name
-        }
-
-        db.get().collection('artists').insert(artist, function(err, result) {
-            if (err) {
-                console.log(err);
-                return res.sendStatus(500);
-            }
-            res.sendStatus(200);
-        })
-    } else {
-        res.sendStatus(400);
-    }
-
-});
-
-app.put(`${BASE_URL}/artists/:id`, function (req, res) {
-    db.get().collection('artists').updateOne(
-        { _id: ObjectID(req.params.id) },
-        { name: req.body.name },
-        function(err, result) {
-            if (err) {
-                console.log(err);
-                return res.sendStatus(500);
-            }
-            res.sendStatus(200);
-        }
-    )
-});
-
-app.delete(`${BASE_URL}/artists/:id`, function (req, res) {
-    db.get().collection('artists').deleteOne(
-       { _id: ObjectID(req.params.id)},
-        function (err, result) {
-            if (err) {
-                console.log(err);
-                return res.sendStatus(500);
-            }
-            res.sendStatus(200);
-        }
-    )
-});
+app.get(`${BASE_URL}/artists/:id`, artistsController.findById);
+app.post(`${BASE_URL}/artists`, artistsController.create);
+app.put(`${BASE_URL}/artists/:id`, artistsController.update);
+app.delete(`${BASE_URL}/artists/:id`, artistsController.delete);
 
 //run server
 db.connect('mongodb://localhost:27017/api', function(err) {
