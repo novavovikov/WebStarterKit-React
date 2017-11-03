@@ -3,7 +3,8 @@ module.exports = function() {
         module: {
             rules: [
                 {
-                    test: /\.js$/,
+                    test: /\.(js|jsx)$/i,
+                    exclude: /node_modules/,
                     loader: 'babel-loader',
                     options: {
                         presets: ['es2017', 'react']
