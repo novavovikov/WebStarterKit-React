@@ -1,4 +1,4 @@
-const Artists = require('../models/artists');
+import Artists from '../models/artists';
 
 exports.all = function(req, res) {
     Artists.all(function(err, docs) {

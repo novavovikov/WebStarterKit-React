@@ -5,14 +5,14 @@ const 	webpack = require('webpack'),
         WebpackCleanupPlugin  = require('webpack-cleanup-plugin'),
 		HtmlWebpackPlugin = require('html-webpack-plugin'),
 
-        img = require('./webpack/img'),
-        fonts = require('./webpack/fonts'),
-        css = require('./webpack/css'),
-		js = require('./webpack/js'),
-		pug = require('./webpack/pug'),
+        img = require('./config/img'),
+        fonts = require('./config/fonts'),
+        css = require('./config/css'),
+		js = require('./config/js'),
+		pug = require('./config/pug'),
 
-        devServer = require('./webpack/devserver'),
-        jsUglify = require('./webpack/js.uglify.js');
+        devServer = require('./config/devserver'),
+        jsUglify = require('./config/js.uglify.js');
 
 const PATHS = {
     src: path.resolve(__dirname, 'client'),

@@ -1,19 +1,18 @@
-import React from 'react';
+import AppRoot from './components/app-root';
+import Home from './pages/home';
+import About from './pages/about';
 
-import { Switch, Route } from 'react-router-dom';
+const routes = [
+    {
+        component: Home,
+        routes: [
+            {
+                component: Home,
+                path: '/',
+                exact: true
+            }
+        ]
+    }
+];
 
-import Home from './pages/Home';
-import About from './pages/About';
-import NoMatch from './pages/noMatch';
-
-const Routes = () => {
-    return (
-        <Switch>
-            <Route exact path="/" component={Home}/>
-            <Route path="/about" component={About}/>
-            <Route component={NoMatch}/>
-        </Switch>
-    )
-};
-
-export default Routes;
+export default routes;

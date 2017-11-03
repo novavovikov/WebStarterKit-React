@@ -1,18 +1,16 @@
-const express = require('express');
-const path = require('path');
-const http = require('http');
-const bodyParser = require('body-parser');
-const db = require('./db');
-const config = require('../config/env');
+import express from 'express';
+import path from 'path';
+import http from 'http';
+import bodyParser from 'body-parser';
+import db from './db';
+import config from '../config/env';
 
 //controllers
-const artistsController = require('./db/controllers/artists');
+import artistsController from './db/controllers/artists';
 
 //params
 const app = express();
-
 let server = http.createServer(app);
-
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({
@@ -36,9 +34,9 @@ app.get(config.apiUrl + '/artists/:id', artistsController.findById);
 app.post(config.apiUrl + '/artists', artistsController.create);
 app.put(config.apiUrl + '/artists/:id', artistsController.update);
 app.delete(config.apiUrl + '/artists/:id', artistsController.delete);
-
 //route
 app.get('*', function (req, res) {
+    console.log(req.originalUrl);
 	res.redirect('/');
 });
 

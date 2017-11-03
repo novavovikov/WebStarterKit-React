@@ -1,5 +1,5 @@
-const   db = require('../index'),
-        ObjectID = require('mongodb').ObjectID;
+import db from '../index';
+import { ObjectID } from 'mongodb';
 
 exports.all = function(cb) {
     db.get().collection('artists').find().toArray(function(err, docs) {
