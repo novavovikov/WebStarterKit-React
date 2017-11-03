@@ -6,7 +6,7 @@ module.exports = function() {
                     test: /\.js$/,
                     loader: 'babel-loader',
                     options: {
-                        presets: ['es2017', 'react']
+                        presets: ['es2015', 'react']
                     }
                 }
             ]

@@ -14,7 +14,7 @@
 1. Устанавливаем необходимые пакеты npm командой "npm i"
 2. Добавьте MongoDB в переменные среды (необходимые команды указаны с учётом этого).
 3. Выполните в консоли "md \data\db"
-3. Выполните в консоли "mongod --dbpath D:\Projects\Webpack\back\db\mongodb\data" (D:\Projects\WebStarterKit-Webpack\ - Здесь необходимо указать путь к Вашему проекту)
+3. Выполните в консоли "mongod --dbpath D:\Projects\Webpack\server\db\mongodb\data" (D:\Projects\WebStarterKit-Webpack\ - Здесь необходимо указать путь к Вашему проекту)
 4. Запуск MongoDB
 
 #### Основные команды

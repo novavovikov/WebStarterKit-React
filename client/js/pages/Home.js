@@ -5,9 +5,7 @@ import { bindActionCreators } from 'redux';
 import { example } from '../actions/example';
 
 const Home = ({
-    ownProps,
-    exampleHandler,
-    exampleArr
+    exampleHandler
 }) => {
     const handleButton = function() {
         let path = '/api/artists';
