@@ -1,23 +1,18 @@
-const 	webpack = require('webpack'),
-        path = require('path'),
+const webpack = require('webpack'),
 		merge = require('webpack-merge'),
+		config = require('./config/env'),
 
-        WebpackCleanupPlugin  = require('webpack-cleanup-plugin'),
+		WebpackCleanupPlugin  = require('webpack-cleanup-plugin'),
 		HtmlWebpackPlugin = require('html-webpack-plugin'),
 
-        img = require('./config/img'),
-        fonts = require('./config/fonts'),
-        css = require('./config/css'),
+		img = require('./config/img'),
+		fonts = require('./config/fonts'),
+		css = require('./config/css'),
 		js = require('./config/js'),
 		pug = require('./config/pug'),
 
-        devServer = require('./config/devserver'),
-        jsUglify = require('./config/js.uglify.js');
-
-const PATHS = {
-    src: path.resolve(__dirname, 'client'),
-    build: path.resolve(__dirname, 'public')
-};
+		devServer = require('./config/devserver'),
+		jsUglify = require('./config/js.uglify.js');
 
 //plugins
 const getPlugins = function () {
@@ -25,7 +20,7 @@ const getPlugins = function () {
 			new WebpackCleanupPlugin(),
 			new HtmlWebpackPlugin({
 				filename: `index.html`,
-				template: `${PATHS.src}/index.pug`
+				template: `${config.clientDir}/index.pug`
 			}),
 			new webpack.optimize.CommonsChunkPlugin({
 				name: 'common'
@@ -39,10 +34,10 @@ const getPlugins = function () {
 const common = merge([
 	{
 		entry: {
-			index: `${PATHS.src}/js/index.js`
+			index: `${config.clientDir}/js/index.js`
 		},
 		output: {
-			path: PATHS.build,
+			path: config.publicDir,
 			filename: 'js/[name].js'
 		},
 		plugins: getPlugins()
@@ -53,7 +48,6 @@ const common = merge([
 	js(),
 	pug()
 ]);
-
 
 //
 module.exports = function (env) {

@@ -5,7 +5,10 @@ module.exports = function() {
                 {
                     test: /\.(js|jsx)$/i,
                     exclude: /node_modules/,
-                    loader: 'babel-loader'
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['es2017']
+                    }
                 }
             ]
         }

@@ -1,5 +1,4 @@
 import express from 'express';
-import path from 'path';
 import http from 'http';
 import bodyParser from 'body-parser';
 import db from './db';
@@ -17,11 +16,11 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(config.publicDir));
 
 //routes
 app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, '../public'));
+    res.sendFile(config.publicDir);
 });
 
 app.get(config.apiUrl, function (req, res) {
@@ -34,6 +33,7 @@ app.get(config.apiUrl + '/artists/:id', artistsController.findById);
 app.post(config.apiUrl + '/artists', artistsController.create);
 app.put(config.apiUrl + '/artists/:id', artistsController.update);
 app.delete(config.apiUrl + '/artists/:id', artistsController.delete);
+
 //route
 app.get('*', function (req, res) {
     console.log(req.originalUrl);
