@@ -1,22 +1,22 @@
 const 	webpack = require('webpack'),
-		path = require('path'),
+        path = require('path'),
 		merge = require('webpack-merge'),
 
+        WebpackCleanupPlugin  = require('webpack-cleanup-plugin'),
 		HtmlWebpackPlugin = require('html-webpack-plugin'),
-		WebpackCleanupPlugin  = require('webpack-cleanup-plugin'),
 
-		devServer = require('./webpack/devserver'),
-		jsUglify = require('./webpack/js.uglify'),
-
+        img = require('./webpack/img'),
+        fonts = require('./webpack/fonts'),
+        css = require('./webpack/css'),
 		js = require('./webpack/js'),
 		pug = require('./webpack/pug'),
-		img = require('./webpack/img'),
-		fonts = require('./webpack/fonts'),
-		css = require('./webpack/css');
+
+        devServer = require('./webpack/devserver'),
+        jsUglify = require('./webpack/js.uglify.js');
 
 const PATHS = {
-    	src: path.resolve(__dirname, 'client'),
-    	build: path.resolve(__dirname, 'public')
+    src: path.resolve(__dirname, 'client'),
+    build: path.resolve(__dirname, 'public')
 };
 
 //plugins

@@ -1,15 +1,15 @@
-const   express = require('express'),
-        path = require('path'),
-        http = require('http'),
-        bodyParser = require('body-parser'),
-        db = require('./db'),
-        //controllers
-        artistsController = require('./db/controllers/artists');
+const express = require('express');
+const path = require('path');
+const http = require('http');
+const bodyParser = require('body-parser');
+const db = require('./db');
+const config = require('../config/env');
+
+//controllers
+const artistsController = require('./db/controllers/artists');
 
 //params
 const app = express();
-const   BASE_URL = '/api',
-        PORT = 3012;
 
 let server = http.createServer(app);
 
@@ -26,16 +26,16 @@ app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, '../public'));
 });
 
-app.get(BASE_URL, function (req, res) {
+app.get(config.apiUrl, function (req, res) {
     res.sendStatus(200)
 });
 
 //api
-app.get(BASE_URL + '/artists', artistsController.all);
-app.get(BASE_URL + '/artists/:id', artistsController.findById);
-app.post(BASE_URL + '/artists', artistsController.create);
-app.put(BASE_URL + '/artists/:id', artistsController.update);
-app.delete(BASE_URL + '/artists/:id', artistsController.delete);
+app.get(config.apiUrl + '/artists', artistsController.all);
+app.get(config.apiUrl + '/artists/:id', artistsController.findById);
+app.post(config.apiUrl + '/artists', artistsController.create);
+app.put(config.apiUrl + '/artists/:id', artistsController.update);
+app.delete(config.apiUrl + '/artists/:id', artistsController.delete);
 
 //route
 app.get('*', function (req, res) {
@@ -43,9 +43,9 @@ app.get('*', function (req, res) {
 });
 
 //run server
-db.connect('mongodb://localhost:27017/api', function(err) {
+db.connect(config.dbURL, function(err) {
     if (err) return console.log(err);
-    server.listen(PORT, function () {
-        console.log('API app started');
+    server.listen(config.port, function () {
+        console.log('App started');
     });
 });
