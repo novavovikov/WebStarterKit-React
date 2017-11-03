@@ -60,7 +60,7 @@ module.exports = function (env) {
     if (env === 'production') {
         return merge([
             common,
-            jsUglify()
+            // jsUglify()
         ])
     }
     if (env === 'development') {
