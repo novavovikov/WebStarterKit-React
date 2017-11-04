@@ -1,18 +1,18 @@
 const webpack = require('webpack'),
 		merge = require('webpack-merge'),
-		config = require('./config/env'),
+		config = require('./src/config/env'),
 
 		WebpackCleanupPlugin  = require('webpack-cleanup-plugin'),
 		HtmlWebpackPlugin = require('html-webpack-plugin'),
 
-		img = require('./config/img'),
-		fonts = require('./config/fonts'),
-		css = require('./config/css'),
-		js = require('./config/js'),
-		pug = require('./config/pug'),
+		img = require('./src/config/img'),
+		fonts = require('./src/config/fonts'),
+		css = require('./src/config/css'),
+		js = require('./src/config/js'),
+		pug = require('./src/config/pug'),
 
-		devServer = require('./config/devserver'),
-		jsUglify = require('./config/js.uglify.js');
+		devServer = require('./src/config/devserver'),
+		jsUglify = require('./src/config/js.uglify.js');
 
 //plugins
 const getPlugins = function () {
@@ -34,7 +34,7 @@ const getPlugins = function () {
 const common = merge([
 	{
 		entry: {
-			index: `${config.clientDir}/js/index.js`
+			index: `${config.clientDir}/js/index.jsx`
 		},
 		output: {
 			path: config.publicDir,
