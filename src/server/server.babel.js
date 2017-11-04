@@ -2,7 +2,7 @@ import express from 'express';
 import http from 'http';
 import bodyParser from 'body-parser';
 import db from './db';
-import config from '../config/env';
+import config from '../../config/env';
 
 //controllers
 import artistsController from './db/controllers/artists';
