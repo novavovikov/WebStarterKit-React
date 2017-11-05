@@ -4,14 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm-run-all -p database dev-server  server",
-    "production": "npm-run-all -p database build server",
+    "start": "npm run dev-server && npm-run-all -p server+database",
+    "production": "npm run build && npm-run-all -p server+database",
     "dev-server": "webpack-dev-server --env development",
     "server+database": "npm-run-all -p database server",
     "database": "mongod --dbpath ./server/db/mongodb",
     "server": "nodemon ./server",
-    "build": "webpack --env production",
-    "remove-public": "rimraf public/"
+    "build": "webpack --env production"
   },
   "author": "NovaVovikov",
   "license": "MIT",
