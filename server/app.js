@@ -1,5 +1,4 @@
 import express from 'express';
-import path from 'path';
 import favicon from 'serve-favicon';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
@@ -12,14 +11,15 @@ import users from './users';
 //params
 const app = express();
 
+
 // view engine setup
-app.set('views', PATH.views);
+app.use(express.static(PATH.public));
+app.set('views', PATH.client);
 app.set('view engine', 'pug');
 
 app.locals.pretty = true;
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+// app.use(favicon(PATH.favicon));
 
 app.use(logger('dev'));
 app.use(bodyParser.json()); // for parsing application/json
@@ -27,7 +27,6 @@ app.use(bodyParser.urlencoded({
 	extended: true
 }));
 app.use(cookieParser());
-app.use(express.static(PATH.public));
 
 app.use('/', routes);
 app.use('/users', users);

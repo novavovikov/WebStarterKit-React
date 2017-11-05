@@ -15,7 +15,7 @@ module.exports.ENV = {
 
 module.exports.PATH = {
 	public: path.join(__dirname, 'public'),
-	views: path.join(__dirname, 'views'),
 	client: path.join(__dirname, 'client'),
 	server: path.join(__dirname, 'server'),
+	favicon: path.join(__dirname, 'client/favicon.ico'),
 };

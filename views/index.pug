@@ -1,9 +1,0 @@
-extends layout
-
-block content
-  script(type='text/javascript').
-    window.__INITIAL_STATE__ = !{JSON.stringify(data)}
-  main#app!= content
-
-  script(stype='text/javascript', src="js/common.js")
-  script(type='text/javascript', src='js/server.js')

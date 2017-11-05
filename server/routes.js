@@ -12,15 +12,13 @@ import thunk from 'redux-thunk';
 
 import routes from '../client/js/routes';
 import reducers from '../client/js/reducers';
-import { ENV, PATH } from '../server.config';
+import { ENV } from '../server.config';
 
 //controllers
 import artistsController from './db/controllers/artists';
 
-/*eslint-disable*/
+//
 const router = express.Router();
-/*eslint-enable*/
-
 const store = createStore(reducers, applyMiddleware(thunk));
 
 router.get('/api', (req, res) => {
@@ -41,7 +39,7 @@ router.get('*', (req, res) => {
 		let fetchData = route.component.fetchData;
 		return fetchData instanceof Function ? fetchData(store) : Promise.resolve(null)
 	});
-	return Promise.all(promises).then((data) => {
+	return Promise.all(promises).then(() => {
 		let context = {};
 		const content = renderToString(
 			<Provider store={store}>
@@ -49,14 +47,14 @@ router.get('*', (req, res) => {
 					{renderRoutes(routes)}
 				</StaticRouter>
 			</Provider>
-	);
-		if (context.status === 404) {
-			res.status(404);
-		}
-		if (context.status === 302) {
-			return res.redirect(302, context.url);
-		}
-		res.sendFile(PATH.public  + '/index.html', {title: 'Express', data: store.getState(), content });
+		);
+
+		if (context.status === 404) res.status(404);
+		if (context.status === 302) return res.redirect(302, context.url);
+		res.render('server', {
+			data: store.getState(),
+			content
+		});
 	});
 });
 

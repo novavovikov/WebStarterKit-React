@@ -1,5 +1,5 @@
 let debug = require('debug')('server-render:server');
-import app from './server';
+import app from './app';
 import http from 'http';
 import db from './db';
 import { ENV } from '../server.config';

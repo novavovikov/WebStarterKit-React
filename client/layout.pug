@@ -14,7 +14,9 @@ html
     // Meta Information
     meta(name='robots', content='index, follow')
     meta(name='language', content='Russian')
+
+    block styles
   body
+    block custom-scripts
     block content
-    script(stype='text/javascript', src="js/common.js")
-    script(type='text/javascript', src='js/server.js')
+    block scripts
