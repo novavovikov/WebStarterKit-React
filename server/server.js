@@ -4,7 +4,7 @@ import favicon from 'serve-favicon';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-import { ENV, PATH} from '../config';
+import { PATH} from '../config';
 
 import routes from './routes';
 import users from './users';

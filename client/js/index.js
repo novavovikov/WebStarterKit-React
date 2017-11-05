@@ -12,18 +12,14 @@ import thunk from 'redux-thunk';
 import reducer from './reducers/index';
 import routes from './routes';
 
-import Header from './components/header';
+import '../styles/main';
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
-            <div className="page">
-                <Header />
-                <hr/>
-                {renderRoutes(routes)}
-            </div>
+             {renderRoutes(routes)}
         </BrowserRouter>
     </Provider>,
     document.getElementById('app')
