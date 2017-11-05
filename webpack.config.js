@@ -34,7 +34,7 @@ const getPlugins = function () {
 const common = merge([
 	{
 		entry: {
-			index: `${config.clientDir}/js/index.jsx`
+			index: `${config.clientDir}/js/index.js`
 		},
 		output: {
 			path: config.publicDir,
