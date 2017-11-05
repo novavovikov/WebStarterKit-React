@@ -1,6 +1,6 @@
 const webpack = require('webpack'),
 		merge = require('webpack-merge'),
-		config = require('./config/env'),
+		PATH = require('./config').PATH,
 
 		WebpackCleanupPlugin  = require('webpack-cleanup-plugin'),
 		HtmlWebpackPlugin = require('html-webpack-plugin'),
@@ -20,7 +20,7 @@ const getPlugins = function () {
 			new WebpackCleanupPlugin(),
 			new HtmlWebpackPlugin({
 				filename: `index.html`,
-				template: `${config.clientDir}/index.pug`
+				template: `${PATH.client}/index.pug`
 			}),
 			new webpack.optimize.CommonsChunkPlugin({
 				name: 'common'
@@ -34,10 +34,10 @@ const getPlugins = function () {
 const common = merge([
 	{
 		entry: {
-			index: `${config.clientDir}/js/index.js`
+			index: `${PATH.client}/js/index.js`
 		},
 		output: {
-			path: config.publicDir,
+			path: PATH.public,
 			filename: 'js/[name].js'
 		},
 		plugins: getPlugins()
