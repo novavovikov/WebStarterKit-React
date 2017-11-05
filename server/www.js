@@ -2,7 +2,7 @@ let debug = require('debug')('server-render:server');
 import app from './server';
 import http from 'http';
 import db from './db';
-import { ENV } from '../config';
+import { ENV } from '../server.config';
 
 /**
  * Get port from environment and store in Express.

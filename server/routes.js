@@ -1,7 +1,6 @@
 import express from 'express';
-import request from 'request';
 
-import React, {Component} from 'react';
+import React from 'react';
 import {renderToString} from 'react-dom/server';
 
 import StaticRouter from 'react-router-dom/StaticRouter';
@@ -13,7 +12,7 @@ import thunk from 'redux-thunk';
 
 import routes from '../client/js/routes';
 import reducers from '../client/js/reducers';
-import { ENV } from '../config';
+import { ENV, PATH } from '../server.config';
 
 //controllers
 import artistsController from './db/controllers/artists';
@@ -57,7 +56,7 @@ router.get('*', (req, res) => {
 		if (context.status === 302) {
 			return res.redirect(302, context.url);
 		}
-		res.render('index', {title: 'Express', data: store.getState(), content });
+		res.sendFile(PATH.public  + '/index.html', {title: 'Express', data: store.getState(), content });
 	});
 });
 

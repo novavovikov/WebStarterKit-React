@@ -2,28 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { example } from '../actions/example';
-
 const Home = ({
-    exampleHandler
+     ownProps
 }) => {
-    const handleButton = function() {
-        let path = '/api/artists';
-        fetch(path)
-            .then(function(response) {
-					console.log(response);
-                response.json().then(function (data) {
-                    console.log(data);
-                    exampleHandler(data)
-                })
-            })
-    };
-
+    console.log(ownProps);
     return(
         <div className="main">
-            <button
-                onClick={handleButton}
-            >Handler</button>
         </div>
     )
 };
@@ -31,14 +15,13 @@ const Home = ({
 //
 function mapStateToProps(state, ownProps) {
     return {
-        ownProps,
-        exampleArr: state.example
+        ownProps
     }
 }
 
 function matchDispatchtoProps(dispatch) {
     return bindActionCreators({
-        exampleHandler: example
+
     }, dispatch)
 }
 

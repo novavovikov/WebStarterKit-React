@@ -1,18 +1,18 @@
 const webpack = require('webpack'),
 		merge = require('webpack-merge'),
-		PATH = require('./config').PATH,
+		PATH = require('./server.config').PATH,
 
 		WebpackCleanupPlugin  = require('webpack-cleanup-plugin'),
 		HtmlWebpackPlugin = require('html-webpack-plugin'),
 
-		img = require('./config/img'),
-		fonts = require('./config/fonts'),
-		css = require('./config/css'),
-		js = require('./config/js'),
-		pug = require('./config/pug'),
+		img = require('./webpack/img'),
+		fonts = require('./webpack/fonts'),
+		css = require('./webpack/css'),
+		js = require('./webpack/js'),
+		pug = require('./webpack/pug'),
 
-		devServer = require('./config/devserver'),
-		jsUglify = require('./config/js.uglify.js');
+		devServer = require('./webpack/devserver'),
+		jsUglify = require('./webpack/js.uglify.js');
 
 //plugins
 const getPlugins = function () {

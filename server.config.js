@@ -1,11 +1,11 @@
 const path = require('path');
 
 module.exports.ENV = {
+	port: process.env.PORT || 3000,
+
 	apiUrl: '/api',
 	apiHost: 'localhost',
-	apiPort: 3012,
-
-	port: process.env.PORT || 3000,
+	apiPort: 3000,
 
 	webpackHost: 'localhost',
 	webpackPort: 9000,
