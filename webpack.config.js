@@ -1,4 +1,4 @@
-const webpack = require('webpack'),
+const	webpack = require('webpack'),
 		merge = require('webpack-merge'),
 		PATH = require('./server.config').PATH,
 
@@ -18,12 +18,14 @@ const webpack = require('webpack'),
 const getPlugins = function () {
 		let plugins = [
 			new WebpackCleanupPlugin(),
+			new webpack.DefinePlugin({
+				'process.env': {
+					NODE_ENV: JSON.stringify('production')
+				}
+			}),
 			new HtmlWebpackPlugin({
 				filename: `index.html`,
 				template: `${PATH.client}/index.pug`
-			}),
-			new webpack.optimize.CommonsChunkPlugin({
-				name: 'common'
 			})
 		];
 
@@ -54,7 +56,7 @@ module.exports = function (env) {
     if (env === 'production') {
         return merge([
             common,
-            // jsUglify()
+            jsUglify()
         ])
     }
     if (env === 'development') {
