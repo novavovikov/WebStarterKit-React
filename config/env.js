@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
     apiUrl: '/api',
     apiHost: 'localhost',
-    apiPort: 3012,
+    apiPort: 3000,
 
     port: process.env.PORT || 3000,
     publicDir: path.join(__dirname, '../../public'),

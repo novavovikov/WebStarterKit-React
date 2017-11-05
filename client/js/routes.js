@@ -1,18 +1,27 @@
-import AppRoot from './components/app-root.jsx';
-import Home from './pages/Home.jsx';
-import About from './pages/About.jsx';
+import AppRoot from './components/app-root';
+import Home from './pages/Home';
+import About from './pages/About';
+import NotFound from './pages/NotFound';
 
 const routes = [
-    {
-        component: Home,
-        routes: [
-            {
-                component: Home,
-                path: '/',
-                exact: true
-            }
-        ]
-    }
+	{ component: AppRoot,
+		routes: [
+			{ path: '/',
+				exact: true,
+				component: Home
+			},
+			{ path: '/home',
+				component: Home
+			},
+			{ path: '/about',
+				component: About
+			},
+			{
+				path: '*',
+				component: NotFound
+			}
+		]
+	}
 ];
 
 export default routes;
