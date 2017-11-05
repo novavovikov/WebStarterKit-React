@@ -12,7 +12,7 @@ import thunk from 'redux-thunk';
 import reducer from './reducers/index';
 import routes from './routes';
 
-import '../styles/main';
+
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
