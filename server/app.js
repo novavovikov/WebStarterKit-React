@@ -11,12 +11,10 @@ import users from './users';
 //params
 const app = express();
 
-
 // view engine setup
 app.use(express.static(PATH.public));
 app.set('views', PATH.client);
 app.set('view engine', 'pug');
-
 app.locals.pretty = true;
 
 // app.use(favicon(PATH.favicon));

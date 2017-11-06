@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run dev-server && npm-run-all -p server+database",
+    "start": "npm-run-all -p dev-server server+database",
     "production": "npm run build && npm-run-all -p server+database",
     "dev-server": "webpack-dev-server --env development",
     "server+database": "npm-run-all -p database server",
