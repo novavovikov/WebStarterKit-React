@@ -3,10 +3,10 @@ import favicon from 'serve-favicon';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-import { PATH } from '../server.config';
+import { PATH } from './config';
 
-import routes from './routes';
-import users from './users';
+import routes from './routes/index';
+import users from './routes/users';
 
 //params
 const app = express();

@@ -8,8 +8,8 @@
     "production": "npm run build && npm-run-all -p server+database",
     "dev-server": "webpack-dev-server --env development",
     "server+database": "npm-run-all -p database server",
-    "database": "mongod --dbpath ./server/db/mongodb",
-    "server": "nodemon ./server",
+    "database": "mongod --dbpath ./server/data/db",
+    "server": "nodemon ./bin",
     "build": "webpack --env production"
   },
   "author": "NovaVovikov",

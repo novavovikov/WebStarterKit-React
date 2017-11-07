@@ -9,7 +9,7 @@ import { renderRoutes } from 'react-router-config';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
-import reducer from './reducers/index';
+import reducer from './reducers';
 import routes from './routes';
 
 import '../styles/main.styl';

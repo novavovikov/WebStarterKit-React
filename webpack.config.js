@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const PATH = require('./server.config').PATH;
+const PATH = require('./server/config').PATH;
 
 const WebpackCleanupPlugin  = require('webpack-cleanup-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
