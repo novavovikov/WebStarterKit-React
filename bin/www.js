@@ -23,7 +23,7 @@ const server = http.createServer(app);
  */
 
 db.connect(ENV.dbURL, function(err) {
-    if (err) return console.log(err);
+    if (err) return console.log(`Error connection: ${err}`);
     server.listen(port, function () {
         console.log('App started');
     });

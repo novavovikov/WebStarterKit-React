@@ -16,7 +16,8 @@ import routes from '../../client/js/routes';
 import reducers from '../../client/js/reducers';
 
 //controllers
-import artistsController from '../db/controllers/artists';
+import userController from '../db/controllers/user';
+// import artistsController from '../db/controllers/artists';
 
 //
 const router = express.Router();
@@ -27,11 +28,16 @@ router.get('/api', (req, res) => {
 });
 
 //api
-router.get(ENV.apiUrl + '/artists', artistsController.all);
-router.get(ENV.apiUrl + '/artists/:id', artistsController.findById);
-router.post(ENV.apiUrl + '/artists', artistsController.create);
-router.put(ENV.apiUrl + '/artists/:id', artistsController.update);
-router.delete(ENV.apiUrl + '/artists/:id', artistsController.delete);
+router.get(ENV.apiUrl + '/users', userController.all);
+router.post(ENV.apiUrl + '/users', userController.create);
+router.get(ENV.apiUrl + '/users/name', userController.findByName);
+router.get(ENV.apiUrl + '/users/:id', userController.findById);
+
+// router.get(ENV.apiUrl + '/artists', artistsController.all);
+// router.post(ENV.apiUrl + '/artists', artistsController.create);
+// router.get(ENV.apiUrl + '/artists/:id', artistsController.findById);
+// router.put(ENV.apiUrl + '/artists/:id', artistsController.update);
+// router.delete(ENV.apiUrl + '/artists/:id', artistsController.delete);
 
 //routes
 router.get('*', (req, res) => {
