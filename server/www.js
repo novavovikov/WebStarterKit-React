@@ -1,4 +1,4 @@
-let debug = require('debug')('server-render:server');
+const debug = require('debug')('server-render:server');
 import app from './app';
 import http from 'http';
 import db from './db';
