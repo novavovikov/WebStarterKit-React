@@ -25,10 +25,10 @@ const startServer = () => {
     server.listen(port, function () {
         console.log(`App started on port ${port}`);
     });
-
-    server.on('error', onError);
-    server.on('listening', onListening);
 };
+
+server.on('error', onError);
+server.on('listening', onListening);
 
 db.connect(ENV.dbURL)
     .on('error', console.log)
