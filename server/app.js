@@ -1,15 +1,19 @@
 import express from 'express';
+import mongoose from 'mongoose';
+import session from 'express-session';
 import favicon from 'serve-favicon';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-import { PATH } from './config';
+import { PATH, ENV } from './config';
 
 import routes from './routes';
 import api from './routes/api';
+import users from './routes/users';
 
 //params
 const app = express();
+const MongoStore = require('connect-mongo')(session);
 
 // view engine setup
 app.use(express.static(PATH.public));
@@ -26,8 +30,19 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 
+//sessions
+app.use(session({
+    secret: 'i need more beers',
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({
+        url: ENV.dbURL
+    })
+}));
+
 //routes
 app.use('/api', api);
+app.use('/users', users);
 app.use('/', routes);
 
 // catch 404 and forward to error handler

@@ -1,34 +1,36 @@
 import User from '../models/user';
+import crypto  from 'crypto';
 
-exports.all = function(req, res) {
-    if (req.query.name) {
-        User.findUsersByName(req.query.name, (err, users) => {
-            if (err) return res.send(err);
-            res.send(users);
-        });
-    } else {
-        User.find({}, function(err, users) {
-            if (err) return res.send(err);
-            res.send(users);
-        });
-    }
+exports.createUser = function(userData){
+    var user = {
+        name: userData.name,
+        email: userData.email,
+        password: hash(userData.password)
+    };
+    return new User(user).save()
 };
 
-exports.create = function(req, res) {
-    if (req.body.name === undefined) return res.send('Name is empty');
-    const user = new User({
-        name: req.body.name
-    });
+exports.getUser = function(id) {
+    return User.findOne(id)
+};
 
-    user.save((err, createdUser) => {
-        if (err) return res.send(err);
-        res.send(createdUser);
+exports.checkUser = function(userData, cb) {
+    User.findOne({ email: userData.email }, function (err, doc){
+        if (err) return console.log(err);
+        cb(doc);
     });
 };
 
-exports.findById = function(req, res) {
-    User.findById(req.params.id, function(err, user) {
-        if (err) return res.send(err);
-        res.send(user);
-    });
-};
+function hash(text) {
+    return crypto.createHash('sha1')
+        .update(text).digest('base64')
+}
+
+// .then(function(doc){
+//     if ( doc.password == hash(userData.password) ){
+//         console.log("User password is ok");
+//         return Promise.resolve(doc)
+//     } else {
+//         return Promise.reject("Error wrong")
+//     }
+// })
