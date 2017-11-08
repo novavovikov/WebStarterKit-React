@@ -8,7 +8,6 @@ import db from '../server/db';
  * Get port from environment and store in Express.
  */
 
-
 const port = normalizePort(process.env.PORT || ENV.port);
 app.set('port', port);
 
@@ -19,18 +18,22 @@ app.set('port', port);
 const server = http.createServer(app);
 
 /**
- * Listen on provided port, on all network interfaces.
+ * Run database and server
  */
 
-db.connect(ENV.dbURL, function(err) {
-    if (err) return console.log(`Error connection: ${err}`);
+const startServer = () => {
     server.listen(port, function () {
-        console.log('App started');
+        console.log(`App started on port ${port}`);
     });
-});
 
-server.on('error', onError);
-server.on('listening', onListening);
+    server.on('error', onError);
+    server.on('listening', onListening);
+};
+
+db.connect(ENV.dbURL)
+    .on('error', console.log)
+    .on('disconnected', db.connect)
+    .on('open', startServer);
 
 /**
  * Normalize a port into a number, string, or false.

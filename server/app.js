@@ -5,8 +5,8 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import { PATH } from './config';
 
-import routes from './routes/index';
-import users from './routes/users';
+import routes from './routes';
+import api from './routes/api';
 
 //params
 const app = express();
@@ -26,8 +26,9 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 
+//routes
+app.use('/api', api);
 app.use('/', routes);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -37,7 +38,6 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
-
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {

@@ -4,10 +4,12 @@ const userSchema = mongoose.Schema({
     name: String
 });
 
-userSchema.statics.findUserByName = (name, cb) => {
-    return this.findOne({
+userSchema.statics.findUsersByName = function (name, cb) {
+    return this.find({
         name: new RegExp(name, 'i')
     }, cb);
 };
 
 const User = mongoose.model('User', userSchema);
+
+module.exports = User;

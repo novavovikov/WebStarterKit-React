@@ -1,3 +1,19 @@
+import User from '../models/user';
+
+exports.all = function(req, res) {
+    if (req.query.name) {
+        User.findUsersByName(req.query.name, (err, users) => {
+            if (err) return res.send(err);
+            res.send(users);
+        });
+    } else {
+        User.find({}, function(err, users) {
+            if (err) return res.send(err);
+            res.send(users);
+        });
+    }
+};
+
 exports.create = function(req, res) {
     if (req.body.name === undefined) return res.send('Name is empty');
     const user = new User({
@@ -11,24 +27,8 @@ exports.create = function(req, res) {
 };
 
 exports.findById = function(req, res) {
-    User.findById('5a01d658ee454d2fec9e0144', function(err, user) {
+    User.findById(req.params.id, function(err, user) {
         if (err) return res.send(err);
         res.send(user);
-    });
-};
-
-exports.findByName = function(req, res) {
-    User.find({
-        name: new RegExp('use', 'i')
-    }, function(err, user) {
-        if (err) return res.send(err);
-        res.send(user);
-    });
-};
-
-exports.all = function(req, res) {
-    User.find({}, function(err, users) {
-        if (err) return res.send(err);
-        res.send(users);
     });
 };

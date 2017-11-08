@@ -1,15 +1,12 @@
 import mongoose from 'mongoose';
 
-exports.connect = function(url, cb) {
-    mongoose.connect(url, {
-        useMongoClient: true
-    });
+exports.connect = (url) => {
+    mongoose.Promise = require('bluebird');
 
-    const db = mongoose.connection;
-    db.on('error', err => {
-        cb(err);
-    });
-    db.once('open', () => {
-        cb();
-    });
+    const options = {
+        useMongoClient: true
+    };
+
+    mongoose.connect(url, options);
+    return mongoose.connection;
 };
