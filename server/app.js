@@ -1,5 +1,4 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import session from 'express-session';
 import favicon from 'serve-favicon';
 import logger from 'morgan';
@@ -9,7 +8,7 @@ import { PATH, ENV } from './config';
 
 import routes from './routes';
 import api from './routes/api';
-import users from './routes/users';
+import auth from './routes/auth';
 
 //params
 const app = express();
@@ -42,7 +41,7 @@ app.use(session({
 
 //routes
 app.use('/api', api);
-app.use('/users', users);
+app.use('/auth', auth);
 app.use('/', routes);
 
 // catch 404 and forward to error handler

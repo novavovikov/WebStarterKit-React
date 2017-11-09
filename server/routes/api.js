@@ -7,6 +7,10 @@ import artistController from '../db/controllers/artist';
 router.get('/', (req, res) => {
     res.sendStatus(200);
 });
+//users
+router.get('/users', userController.all);
+router.post('/users', userController.create);
+router.delete('/users/:id', userController.delete);
 
 //artists
 router.get('/artists', artistController.all);

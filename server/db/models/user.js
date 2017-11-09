@@ -12,9 +12,9 @@ const userSchema = mongoose.Schema({
     }
 });
 
-userSchema.statics.findUsersByName = function (name, cb) {
+userSchema.statics.findUsersByName = function (username, cb) {
     return this.find({
-        name: new RegExp(name, 'i')
+        username: new RegExp(username, 'i')
     }, cb);
 };
 
