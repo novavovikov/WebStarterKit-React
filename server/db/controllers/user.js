@@ -24,6 +24,24 @@ exports.getUser = function(id) {
     return User.findOne(id);
 };
 
+exports.checkUser = function(userData) {
+    User.findOne({username: userData.username}, function (err, user) {
+        if (err) return res.send(err);
+        res.send(user);
+    });
+
+    // return User
+    //     .findOne({email: userData.email})
+    //     .then(function(doc){
+    //         if ( doc.password == hash(userData.password) ){
+    //             console.log("User password is ok");
+    //             return Promise.resolve(doc)
+    //         } else {
+    //             return Promise.reject("Error wrong")
+    //         }
+    //     })
+};
+
 exports.delete = function(req, res) {
     User.remove({ _id: req.params.id }, function(err, user) {
         if (err) return res.send(err);
