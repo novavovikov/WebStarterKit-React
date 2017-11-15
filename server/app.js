@@ -8,7 +8,6 @@ import { PATH, ENV } from './config';
 
 import routes from './routes';
 import api from './routes/api';
-import auth from './routes/auth';
 
 //params
 const app = express();
@@ -22,7 +21,7 @@ app.locals.pretty = true;
 
 // app.use(favicon(PATH.favicon));
 
-app.use(logger('dev'));
+app.use(logger('development'));
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({
 	extended: true
@@ -41,7 +40,6 @@ app.use(session({
 
 //routes
 app.use('/api', api);
-app.use('/auth', auth);
 app.use('/', routes);
 
 // catch 404 and forward to error handler

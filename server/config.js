@@ -7,6 +7,10 @@ module.exports.ENV = {
 	apiHost: 'localhost',
 	apiPort: 3000,
 
+    authUrl: '/auth',
+    authHost: 'localhost',
+    authPort: 3000,
+
 	webpackHost: 'localhost',
 	webpackPort: 9000,
 

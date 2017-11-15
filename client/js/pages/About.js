@@ -9,10 +9,9 @@ const About = ({
     exampleHandler
 }) => {
 	const handleButton = function() {
-		let path = '/api/artists';
+		let path = '/api/users';
 		fetch(path)
 			.then(function(response) {
-				console.log(response);
 				response.json().then(function (data) {
 					console.log(data);
 					exampleHandler(data)
@@ -29,7 +28,7 @@ const About = ({
 
             {exampleArr.map((item, ndx) => (
                 <div key={item._id}>
-                    {item.name}
+                    {item.username}
                 </div>
             ))}
         </div>

@@ -7,10 +7,14 @@ module.exports = function() {
             historyApiFallback: true,
             port: ENV.webpackPort,
             proxy: {
-              '/api/*': {
+                '/api/*': {
                   host: `http://${ENV.webpackHost}:${ENV.webpackPort}/`,
                   target: `http://${ENV.apiHost}:${ENV.apiPort}/`
-              }
+                },
+                '/auth/*': {
+                    host: `http://${ENV.webpackHost}:${ENV.webpackPort}/`,
+                    target: `http://${ENV.authHost}:${ENV.authPort}/`
+                }
             }
         }
     }

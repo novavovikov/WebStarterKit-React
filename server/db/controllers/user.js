@@ -1,17 +1,16 @@
 import User from '../models/user';
-import crypto from 'crypto';
 
 exports.all = function(req, res) {
     User.find({}, function(err, users) {
         if (err) return res.send(err);
-        res.send(users.map((item) => item.username));
+        res.send(users);
     });
 };
 
 exports.create = function(req, res) {
     const user = new User({
         username: req.body.username,
-        password: hash(req.body.password)
+        password: User.encryptPassword(req.body.password)
     });
 
     user.save((err, createdUser) => {
@@ -24,22 +23,29 @@ exports.getUser = function(id) {
     return User.findOne(id);
 };
 
-exports.checkUser = function(userData) {
-    User.findOne({username: userData.username}, function (err, user) {
-        if (err) return res.send(err);
-        res.send(user);
-    });
+exports.checkUser = function(req, res) {
+    const username = req.body.username;
+    const password = req.body.password;
 
-    // return User
-    //     .findOne({email: userData.email})
-    //     .then(function(doc){
-    //         if ( doc.password == hash(userData.password) ){
-    //             console.log("User password is ok");
-    //             return Promise.resolve(doc)
-    //         } else {
-    //             return Promise.reject("Error wrong")
-    //         }
-    //     })
+    User.findOne({username: username}, function (err, user) {
+        if (err) return res.send(err);
+        console.log(req.body);
+
+        if (user) {
+            if (user.checkPassword(password)) {
+                req.session.user = user._id;
+                res.sendStatus(200)
+            } else {
+                res.sendStatus(403)
+            }
+        } else {
+            res.sendStatus(403)
+        }
+    });
+};
+
+exports.checkSession = function(req, res) {
+    res.send(req.session.user);
 };
 
 exports.delete = function(req, res) {
@@ -48,7 +54,3 @@ exports.delete = function(req, res) {
         res.sendStatus(200);
     });
 };
-
-function hash(text) {
-    return crypto.createHash('sha1').update(text).digest('base64')
-}

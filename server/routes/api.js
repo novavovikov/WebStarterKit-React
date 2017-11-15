@@ -2,7 +2,6 @@ import express from 'express';
 const router = express.Router();
 
 import userController from '../db/controllers/user';
-import artistController from '../db/controllers/artist';
 
 router.get('/', (req, res) => {
     res.sendStatus(200);
@@ -11,12 +10,11 @@ router.get('/', (req, res) => {
 router.get('/users', userController.all);
 router.post('/users', userController.create);
 router.delete('/users/:id', userController.delete);
-
-//artists
-router.get('/artists', artistController.all);
-router.post('/artists', artistController.create);
-router.get('/artists/:id', artistController.findById);
-router.put('/artists/:id', artistController.update);
-router.delete('/artists/:id', artistController.delete);
+router.get('/users/session', userController.checkSession);
+router.post('/users/login', userController.checkUser);
+router.post('/users/logout', (req, res) => {
+    req.session.destroy();
+    res.sendStatus(200);
+});
 
 module.exports = router;
