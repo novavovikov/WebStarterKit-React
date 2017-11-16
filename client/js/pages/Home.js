@@ -10,10 +10,12 @@ const Home = ({
     SetPassword,
     ResetAuth
 }) => {
+    console.log(authData);
+
     const changeInput = function (value, type) {
         switch (type) {
-            case 'username': SetUsername(value);
-            case 'password': SetPassword(value);
+            case 'username': SetUsername(value); break;
+            case 'password': SetPassword(value); break;
         }
     };
 
@@ -36,10 +38,12 @@ const Home = ({
     return(
         <div className="main">
             <input type="text"
+                   value={authData.username}
                    placeholder="Username"
                    onChange={(e) => changeInput(e.target.value, 'username')}
             /> <br/>
             <input type="password"
+                    value={authData.password}
                     onChange={(e) => changeInput(e.target.value, 'password')}
                     placeholder="Password"
             /> <br/>

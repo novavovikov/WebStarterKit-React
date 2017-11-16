@@ -1,6 +1,6 @@
 const initialState = {
-    username: null,
-    password: null
+    username: '',
+    password: ''
 };
 
 export default function example (state = initialState, action) {
