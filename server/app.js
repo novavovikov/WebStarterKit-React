@@ -4,7 +4,7 @@ import favicon from 'serve-favicon';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-import { PATH, ENV } from './config';
+import { config } from '../config';
 
 import routes from './routes';
 import api from './routes/api';
@@ -14,14 +14,14 @@ const app = express();
 const MongoStore = require('connect-mongo')(session);
 
 // view engine setup
-app.use(express.static(PATH.public));
-app.set('views', PATH.client);
+app.use(express.static(config.path.public));
+app.set('views', config.path.client);
 app.set('view engine', 'pug');
 app.locals.pretty = true;
 
-// app.use(favicon(PATH.favicon));
+app.use(favicon(config.path.favicon));
 
-app.use(logger('development'));
+app.use(logger('dev'));
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({
 	extended: true
@@ -34,7 +34,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({
-        url: ENV.dbURL
+        url: config.mongoose.uri
     })
 }));
 
@@ -53,7 +53,7 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-	app.use(function(err, req, res) {
+	app.use(function(err, req, res, next) {
 		res.status(err.status || 500);
 		res.render('error', {
 			message: err.message,
@@ -64,7 +64,7 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res) {
+app.use(function(err, req, res, next) {
 	res.status(err.status || 500);
 	res.render('error', {
 		message: err.message,

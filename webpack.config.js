@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const PATH = require('./server/config').PATH;
+const { config } = require('./config');
 
 const WebpackCleanupPlugin  = require('webpack-cleanup-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -24,7 +24,7 @@ const getPlugins = function () {
 			}),
 			new HtmlWebpackPlugin({
 				filename: `index.html`,
-				template: `${PATH.client}/index.pug`
+				template: `${config.path.client}/index.pug`
 			})
 		];
 
@@ -35,10 +35,10 @@ const getPlugins = function () {
 const common = merge([
 	{
 		entry: {
-			index: `${PATH.client}/js/index.js`
+			index: `${config.path.client}/js/index.js`
 		},
 		output: {
-			path: PATH.public,
+			path: config.path.public,
 			filename: 'js/[name].js'
 		},
 		plugins: getPlugins()

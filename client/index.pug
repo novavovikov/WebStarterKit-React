@@ -1,28 +1,4 @@
-doctype html
-html
-	head
-		meta(charset='utf-8')
-		title=title
+extends layout
 
-		// Main Meta information
-		meta(http-equiv='x-ua-compatible', content='ie=edge')
-		meta(name='viewport', content='width=device-width, initial-scale=1.0')
-		meta(name='keywords', content='')
-		meta(name='description', content='')
-		meta(name='author', content='')
-
-		// Meta Information
-		meta(name='robots', content='index, follow')
-		meta(name='language', content='Russian')
-
-		if (styles)
-			link(rel="stylesheet" href=styles)
-	body
-		if (data)
-			script(type='text/javascript').
-				window.__INITIAL_STATE__ = !{JSON.stringify(data)}
-
-		#app!= content
-
-		if (script)
-			script(type='text/javascript', src=script)
+block content
+    #app!= content
