@@ -28,9 +28,7 @@ exports.checkUser = function(req, res, next) {
     const password = req.body.password;
 
     User.findOne({username: username}, function (err, user) {
-
         if (err) return next(err);
-        console.log(req.body);
 
         if (user) {
             if (user.checkPassword(password)) {
@@ -43,10 +41,6 @@ exports.checkUser = function(req, res, next) {
             res.sendStatus(403)
         }
     });
-};
-
-exports.checkSession = function(req, res, next) {
-    res.send(req.session.user);
 };
 
 exports.delete = function(req, res, next) {

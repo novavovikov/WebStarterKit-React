@@ -1,5 +1,4 @@
 import express from 'express';
-const router = express.Router();
 
 import React from 'react';
 import { renderToString } from 'react-dom/server';
@@ -14,6 +13,7 @@ import thunk from 'redux-thunk';
 import routes from '../../client/js/routes';
 import reducers from '../../client/js/reducers';
 
+const router = express.Router();
 const store = createStore(reducers, applyMiddleware(thunk));
 
 //routes

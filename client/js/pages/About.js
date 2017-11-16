@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { example } from '../actions/example';
+import { GetUsers } from '../actions/users';
 
 const About = ({
-    exampleArr,
-    exampleHandler
+    users,
+    GetUsers
 }) => {
 	const handleButton = function() {
 		let path = '/api/users';
@@ -14,7 +14,7 @@ const About = ({
 			.then(function(response) {
 				response.json().then(function (data) {
 					console.log(data);
-					exampleHandler(data)
+					GetUsers(data)
 				})
 			})
 	};
@@ -26,7 +26,7 @@ const About = ({
                onClick={handleButton}
             >Handler</button>
 
-            {exampleArr.map((item, ndx) => (
+            {users.map((item, ndx) => (
                 <div key={item._id}>
                     {item.username}
                 </div>
@@ -38,13 +38,13 @@ const About = ({
 //
 function mapStateToProps(state) {
     return {
-        exampleArr: state.example
+        users: state.users
     }
 }
 
 function matchDispatchtoProps(dispatch) {
 	return bindActionCreators({
-		exampleHandler: example
+        GetUsers: GetUsers
 	}, dispatch)
 }
 

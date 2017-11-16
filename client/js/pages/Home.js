@@ -2,36 +2,52 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import { SetUsername, SetPassword, ResetAuth } from '../actions/auth';
+
 const Home = ({
-     ownProps
+    authData,
+    SetUsername,
+    SetPassword,
+    ResetAuth
 }) => {
+    const changeInput = function (value, type) {
+        switch (type) {
+            case 'username': SetUsername(value);
+            case 'password': SetPassword(value);
+        }
+    };
+
     const handleButton = function (url, req) {
         const xhr = new XMLHttpRequest();
-        xhr.open(req || 'POST', 'api/users/' + url);
+        xhr.open(req || 'POST', 'api/auth/' + url);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onload = function() {
             if (xhr.status === 200) {
                 console.log(xhr.responseText);
+            } else {
+                console.log(xhr.status);
             }
         };
-        xhr.send(JSON.stringify({
-            username: 'User2',
-            password: '123'
-        }));
+
+        xhr.send(JSON.stringify(authData));
+        ResetAuth();
     };
 
     return(
         <div className="main">
-            <button
-                onClick={() => handleButton('session', 'GET')}
-            >Чекнуть сессию</button>
+            <input type="text"
+                   placeholder="Username"
+                   onChange={(e) => changeInput(e.target.value, 'username')}
+            /> <br/>
+            <input type="password"
+                    onChange={(e) => changeInput(e.target.value, 'password')}
+                    placeholder="Password"
+            /> <br/>
 
-            <button
-                onClick={() => handleButton('login')}
-            >Войти</button>
-            <button
-                onClick={() => handleButton('logout')}
-            >Выйти</button>
+            <button onClick={() => handleButton('login')}>Войти</button>
+            <button onClick={() => handleButton('logout')}>Выйти</button>
+            <br/>
+            <button onClick={() => handleButton('session', 'GET')}>Чекнуть сессию</button>
         </div>
     )
 };
@@ -39,13 +55,15 @@ const Home = ({
 //
 function mapStateToProps(state, ownProps) {
     return {
-        ownProps
+        authData: state.auth
     }
 }
 
 function matchDispatchtoProps(dispatch) {
     return bindActionCreators({
-
+        SetUsername: SetUsername,
+        SetPassword: SetPassword,
+        ResetAuth: ResetAuth
     }, dispatch)
 }
 
