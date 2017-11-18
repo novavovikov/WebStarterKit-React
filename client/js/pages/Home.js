@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Fetch } from '../helpers/methods'
 
-import { SetUsername, SetPassword, ResetAuth } from '../actions/auth';
+import { SetUsername, SetPassword, ResetAuth } from '../actions/auth.action';
 
 const Home = ({
     authData,
@@ -11,7 +12,6 @@ const Home = ({
     ResetAuth
 }) => {
     console.log(authData);
-
     const changeInput = function (value, type) {
         switch (type) {
             case 'username': SetUsername(value); break;
@@ -19,19 +19,31 @@ const Home = ({
         }
     };
 
-    const handleButton = function (url, req) {
-        const xhr = new XMLHttpRequest();
-        xhr.open(req || 'POST', 'api/auth/' + url);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                console.log(xhr.responseText);
-            } else {
-                console.log(xhr.status);
-            }
-        };
+    const regUser = function () {
+        Fetch({
+            url: 'api/users',
+            method: 'POST',
+            data: JSON.stringify(authData)
+        }).then(function (e) {
+            console.log(e);
+        }, function (e) {
+            console.log(e)
+        });
 
-        xhr.send(JSON.stringify(authData));
+        ResetAuth();
+    };
+
+    const handleButton = function (url, req) {
+        Fetch({
+            url: 'api/auth/' + url,
+            method: req || 'POST',
+            data: JSON.stringify(authData)
+        }).then(function (e) {
+            console.log(e);
+        }, function (e) {
+            console.log(e)
+        });
+
         ResetAuth();
     };
 
@@ -50,6 +62,8 @@ const Home = ({
 
             <button onClick={() => handleButton('login')}>Войти</button>
             <button onClick={() => handleButton('logout')}>Выйти</button>
+            <br/>
+            <button onClick={regUser}>Зарегестрироваться</button>
             <br/>
             <button onClick={() => handleButton('session', 'GET')}>Чекнуть сессию</button>
         </div>

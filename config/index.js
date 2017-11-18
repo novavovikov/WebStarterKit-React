@@ -1,6 +1,6 @@
 const path = require('path');
 
-exports.config =  {
+exports.config = {
     port: 3000,
     mongoose: {
         uri: `mongodb://localhost:27017/api`,
@@ -10,6 +10,7 @@ exports.config =  {
     },
     api: {
         uri: `/api`,
+        version: ``,
         host: `localhost`,
         port: 3000
     },

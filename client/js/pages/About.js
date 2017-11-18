@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { GetUsers } from '../actions/users';
+import { GetUsers } from '../actions/users.action';
 
 const About = ({
     users,
