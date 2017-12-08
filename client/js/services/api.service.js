@@ -1,4 +1,4 @@
-import config from '../../../config';
+import config from '../../../config/env';
 
 const URL = `http://${config.api.host}:${config.api.port}${config.api.uri}${config.api.version}`;
 

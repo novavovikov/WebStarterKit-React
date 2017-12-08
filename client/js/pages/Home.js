@@ -38,8 +38,8 @@ const Home = ({
             url: 'api/auth/' + url,
             method: req || 'POST',
             data: JSON.stringify(authData)
-        }).then(function (e) {
-            console.log(e);
+        }).then(function (data) {
+            console.log('data:' , JSON.parse(atob(data)));
         }, function (e) {
             console.log(e)
         });

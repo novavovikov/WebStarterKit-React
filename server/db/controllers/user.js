@@ -32,7 +32,8 @@ exports.checkUser = function(req, res, next) {
 
         if (user) {
             if (user.checkPassword(password)) {
-                req.session.user = user._id;
+                console.log(user._id + user.username);
+                req.session.user = new Buffer(`{"username": "${user.username}", "id": "${user._id}"}`).toString('base64');
                 res.sendStatus(200)
             } else {
                 res.sendStatus(403)

@@ -4,7 +4,7 @@ import favicon from 'serve-favicon';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-import { config } from '../config';
+import { config } from '../config/env';
 
 import routes from './routes';
 import api from './routes/api';
