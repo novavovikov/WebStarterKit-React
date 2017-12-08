@@ -13,8 +13,8 @@ import jsUglify from './webpack/js.uglify';
 import pug from './webpack/pug';
 import devServer from './webpack/devServer';
 
-//plugins
-const getPlugins = function () {
+//plugins=
+const getPlugins = () => {
     let plugins = [
         new WebpackCleanupPlugin(),
         new webpack.DefinePlugin({
@@ -51,7 +51,7 @@ const common = merge([
 ]);
 
 //
-module.exports = function (env) {
+module.exports = env => {
     if (env === 'production') {
         return merge([
             common,

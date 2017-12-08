@@ -1,25 +1,33 @@
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-module.exports = function (paths) {
+module.exports = function (env) {
     return {
         module: {
             rules: [
                 {
                     test: /\.styl$/,
-                    include: paths,
                     use: ExtractTextPlugin.extract({
                         publicPath: '../',
                         fallback: "style-loader",
-                        use: ["css-loader", "stylus-loader"]
+                        use: [{
+                            loader: 'css-loader',
+                            options: {
+                                minimize: true
+                            }
+                        } , "stylus-loader"]
                     })
                 },
                 {
                     test: /\.css$/,
-                    include: paths,
                     use: ExtractTextPlugin.extract({
                         publicPath: '../',
                         fallback: "style-loader",
-                        use: "css-loader"
+                        use: {
+                            loader: 'css-loader',
+                            options: {
+                                minimize: true
+                            }
+                        }
                     })
                 }
             ]
