@@ -49,10 +49,13 @@ const Home = ({
             method: req || 'POST',
             data: JSON.stringify(authData)
         }).then( data => {
-            console.log(data);
-            const res = JSON.parse(data);
-            const b64 = window.atob(res.token).split('thisisnotbullshit');
-            console.log('data:' , JSON.parse(hex2a(b64[0])));
+            if (url === 'logout') {
+                console.log(data);
+            } else {
+                const res = JSON.parse(data);
+                const b64 = window.atob(res.token).split('thisisnotbullshit');
+                console.log('data:' , JSON.parse(hex2a(b64[0])));
+            }
         }, function (e) {
             console.log(e)
         });

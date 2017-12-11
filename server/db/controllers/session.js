@@ -5,8 +5,9 @@ exports.checkSession = function(req, res, next) {
             message: 'Enjoy your token!',
             token: req.session.user
         });
+    } else {
+        res.sendStatus(404);
     }
-    res.sendStatus(404);
 };
 
 exports.destroySession = function(req, res, next) {

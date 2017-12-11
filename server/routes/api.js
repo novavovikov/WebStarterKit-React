@@ -11,6 +11,7 @@ apiRoutes.get('/', (req, res) => {
 apiRoutes.post('/auth/login', userController.checkUser);
 apiRoutes.get('/auth/session', sessionController.checkSession);
 apiRoutes.post('/users', userController.create);
+apiRoutes.post('/auth/logout', sessionController.destroySession);
 
 //private api
 apiRoutes.use(function (req, res, next) {
@@ -25,6 +26,5 @@ apiRoutes.use(function (req, res, next) {
 //users
 apiRoutes.get('/users', userController.all);
 apiRoutes.delete('/users/:id', userController.delete);
-apiRoutes.post('/auth/logout', sessionController.destroySession);
 
 module.exports = apiRoutes;
