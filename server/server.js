@@ -1,7 +1,7 @@
 const debug = require('debug')('server-render:server');
-import app from '../server/app';
+import app from './app';
 import http from 'http';
-import db from '../server/db';
+import db from './db';
 import { config } from '../config/env';
 
 /**
@@ -30,7 +30,7 @@ const startServer = () => {
 server.on('error', onError);
 server.on('listening', onListening);
 
-db.connect(config.mongoose.uri, config.mongoose.options)
+db.connect(config.database.uri, config.database.options)
     .on('error', console.log)
     .on('disconnected', db.connect)
     .on('open', startServer);

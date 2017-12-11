@@ -33,13 +33,26 @@ const Home = ({
         ResetAuth();
     };
 
+    function hex2a(hex) {
+        let str = '';
+        for (let i = 0; i < hex.length; i += 2) {
+            str += String.fromCharCode(parseInt(hex.substr(i, 2), 16))
+        }
+        return str;
+    }
+
     const handleButton = function (url, req) {
+        authData.token = 'N2IyMjc1NzM2NTcyNmU2MTZkNjUyMjNhMjAyMjc1NzM2NTcyMjIyYzIwMjI2OTY0MjIzYTIwMjIzNTYxMzI2MTYyMzA2MjY2MzUzNTM3NjM2NDMxMzEzOTM5NjMzNjM0MzczNzM2MzIyMjdkdGhpc2lzbm90YnVsbHNoaXQ=';
+
         Fetch({
             url: 'api/auth/' + url,
             method: req || 'POST',
             data: JSON.stringify(authData)
-        }).then(function (data) {
-            console.log('data:' , JSON.parse(atob(data)));
+        }).then( data => {
+            console.log(data);
+            const res = JSON.parse(data);
+            const b64 = window.atob(res.token).split('thisisnotbullshit');
+            console.log('data:' , JSON.parse(hex2a(b64[0])));
         }, function (e) {
             console.log(e)
         });

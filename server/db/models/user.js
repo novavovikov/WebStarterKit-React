@@ -10,7 +10,8 @@ const userSchema = mongoose.Schema({
     password : {
         type: String,
         required: true
-    }
+    },
+    admin: Boolean
 });
 
 userSchema.statics.findUsersByName = function (username, cb) {

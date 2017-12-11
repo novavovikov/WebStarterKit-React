@@ -1,4 +1,5 @@
 import User from '../models/user';
+import { config } from '../../../config/env';
 
 exports.all = function(req, res, next) {
     User.find({}, function(err, users) {
@@ -9,8 +10,9 @@ exports.all = function(req, res, next) {
 
 exports.create = function(req, res, next) {
     const user = new User({
-        username: req.body.username,
-        password: User.encryptPassword(req.body.password)
+        username: req.body.username.toLowerCase(),
+        password: User.encryptPassword(req.body.password),
+        admin: req.body.admin
     });
 
     user.save((err, createdUser) => {
@@ -32,16 +34,19 @@ exports.checkUser = function(req, res, next) {
 
         if (user) {
             if (user.checkPassword(password)) {
-                console.log(user._id + user.username);
-                req.session.user = new Buffer(`{"username": "${user.username}", "id": "${user._id}"}`).toString('base64');
-                res.sendStatus(200)
+                req.session.user = Buffer.from((Buffer.from(`{"username": "${user.username}", "id": "${user._id}"}`).toString('hex')) + config.database.secret).toString('base64');
+                res.json({
+                    success: true,
+                    message: 'Enjoy your token!',
+                    token: req.session.user
+                });
             } else {
                 res.sendStatus(403)
             }
         } else {
             res.sendStatus(403)
         }
-    });
+    })
 };
 
 exports.delete = function(req, res, next) {

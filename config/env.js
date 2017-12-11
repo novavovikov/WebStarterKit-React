@@ -2,7 +2,8 @@ const path = require('path');
 
 exports.config = {
     port: 3000,
-    mongoose: {
+    database: {
+        secret: 'thisisnotbullshit',
         uri: `mongodb://localhost:27017/api`,
         options: {
             useMongoClient: true

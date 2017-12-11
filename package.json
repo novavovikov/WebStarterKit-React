@@ -9,7 +9,7 @@
     "dev-server": "webpack-dev-server --env development",
     "server+database": "npm-run-all -p database server",
     "database": "mongod --dbpath ./server/data/db",
-    "server": "nodemon ./bin",
+    "server": "nodemon ./server",
     "build": "webpack --env production"
   },
   "author": "NovaVovikov",

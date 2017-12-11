@@ -1,3 +1,2 @@
 require('babel-register');
-
-require('./www');
+require('./server');

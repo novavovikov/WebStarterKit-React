@@ -1,7 +1,7 @@
 import express from 'express';
 import session from 'express-session';
 import favicon from 'serve-favicon';
-import logger from 'morgan';
+import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import { config } from '../config/env';
@@ -21,20 +21,21 @@ app.locals.pretty = true;
 
 app.use(favicon(config.path.favicon));
 
-app.use(logger('dev'));
+app.set('superSecret', config.database.secret);
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
 app.use(cookieParser());
+app.use(morgan('dev'));
 
 //sessions
 app.use(session({
-    secret: 'i need more beers',
+    secret: config.database.secret,
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({
-        url: config.mongoose.uri
+        url: config.database.uri
     })
 }));
 
