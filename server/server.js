@@ -2,13 +2,12 @@ const debug = require('debug')('server-render:server');
 import app from './app';
 import http from 'http';
 import db from './db';
-import { config } from '../config/env';
 
 /**
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(config.port);
+const port = normalizePort(global.config.port);
 app.set('port', port);
 
 /**
@@ -30,7 +29,7 @@ const startServer = () => {
 server.on('error', onError);
 server.on('listening', onListening);
 
-db.connect(config.database.uri, config.database.options)
+db.connect(global.config.database.uri, global.config.database.options)
     .on('error', console.log)
     .on('disconnected', db.connect)
     .on('open', startServer);

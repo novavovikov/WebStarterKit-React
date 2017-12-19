@@ -42,20 +42,14 @@ const Home = ({
     }
 
     const handleButton = function (url, req) {
-        authData.token = 'N2IyMjc1NzM2NTcyNmU2MTZkNjUyMjNhMjAyMjc1NzM2NTcyMjIyYzIwMjI2OTY0MjIzYTIwMjIzNTYxMzI2MTYyMzA2MjY2MzUzNTM3NjM2NDMxMzEzOTM5NjMzNjM0MzczNzM2MzIyMjdkdGhpc2lzbm90YnVsbHNoaXQ=';
+        authData.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhMmFiMGJmNTU3Y2QxMTk5YzY0Nzc2MiIsInVzZXJuYW1lIjoidXNlciIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTMwMDc2MDQsImV4cCI6MTUxNTU5OTYwNH0.bdUNF236NdYPPpktF7k1TrWyGHY4wQAfkMtEGMmVsP4";
 
         Fetch({
             url: 'api/auth/' + url,
             method: req || 'POST',
             data: JSON.stringify(authData)
         }).then( data => {
-            if (url === 'logout') {
-                console.log(data);
-            } else {
-                const res = JSON.parse(data);
-                const b64 = window.atob(res.token).split('thisisnotbullshit');
-                console.log('data:' , JSON.parse(hex2a(b64[0])));
-            }
+            console.log(JSON.parse(data));
         }, function (e) {
             console.log(e)
         });

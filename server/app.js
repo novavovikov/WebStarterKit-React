@@ -4,7 +4,6 @@ import favicon from 'serve-favicon';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-import { config } from '../config/env';
 
 import routes from './routes';
 import api from './routes/api';
@@ -21,7 +20,6 @@ app.locals.pretty = true;
 
 app.use(favicon(config.path.favicon));
 
-app.set('superSecret', config.database.secret);
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({
 	extended: true

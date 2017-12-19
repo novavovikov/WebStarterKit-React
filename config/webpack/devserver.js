@@ -1,15 +1,15 @@
-const { config } = require('../env');
+const { env } = require('../config');
 
 module.exports = function() {
     return {
         devServer: {
             stats: 'errors-only',
             historyApiFallback: true,
-            port: config.webpack.port,
+            port: env.webpack.port,
             proxy: {
                 '/api/*': {
-                    host: `http://${config.webpack.host}:${config.webpack.port}/`,
-                    target: `http://${config.api.host}:${config.api.port}/`
+                    host: `http://${env.webpack.host}:${env.webpack.port}/`,
+                    target: `http://${env.api.host}:${env.api.port}/`
                 }
             }
         }

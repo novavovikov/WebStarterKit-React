@@ -1,6 +1,6 @@
 import webpack from 'webpack';
 import merge from 'webpack-merge';
-import { config } from './env';
+import { env } from './config';
 
 import WebpackCleanupPlugin from 'webpack-cleanup-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -24,7 +24,7 @@ const getPlugins = () => {
         }),
         new HtmlWebpackPlugin({
             filename: `index.html`,
-            template: `${config.path.client}/index.pug`
+            template: `${env.path.client}/index.pug`
         })
     ];
 
@@ -35,10 +35,10 @@ const getPlugins = () => {
 const common = merge([
     {
         entry: {
-            index: `${config.path.client}/js/index.js`
+            index: `${env.path.client}/js/index.js`
         },
         output: {
-            path: config.path.public,
+            path: env.path.public,
             filename: 'js/[name].js'
         },
         plugins: getPlugins()

@@ -38,7 +38,7 @@ router.get('*', (req, res) => {
 		res.render('index', {
 			styles: 'css/index.css',
 			data: store.getState(),
-			script: '/js/env.js',
+			script: '/js/config.js',
 			content
 		});
 	});

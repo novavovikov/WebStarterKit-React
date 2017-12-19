@@ -1,5 +1,5 @@
 import User from '../models/user';
-import { config } from '../../../config/env';
+import jwt from 'jsonwebtoken';
 
 exports.all = function(req, res, next) {
     User.find({}, function(err, users) {
@@ -34,11 +34,18 @@ exports.checkUser = function(req, res, next) {
 
         if (user) {
             if (user.checkPassword(password)) {
-                req.session.user = Buffer.from((Buffer.from(`{"username": "${user.username}", "id": "${user._id}"}`).toString('hex')) + config.database.secret).toString('base64');
+                const payload = {
+                    id: user._id,
+                    username: user.username,
+                    admin: user.admin
+                };
+                const token = jwt.sign(payload, config.database.secret, {
+                    expiresIn: 60*60*24*30 // expires in 30 days
+                });
                 res.json({
                     success: true,
                     message: 'Enjoy your token!',
-                    token: req.session.user
+                    token: token
                 });
             } else {
                 res.sendStatus(403)
