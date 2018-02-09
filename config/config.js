@@ -5,9 +5,7 @@ exports.env = {
     database: {
         secret: 'thisisnotbullshit',
         uri: `mongodb://localhost:27017/api`,
-        options: {
-            useMongoClient: true
-        }
+        options: {}
     },
     api: {
         uri: `/api`,
