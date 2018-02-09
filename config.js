@@ -18,9 +18,9 @@ exports.env = {
         port: 9000
     },
     path: {
-        public: path.join(__dirname, `../public`),
-        client: path.join(__dirname, `../client`),
-        server: path.join(__dirname, `../server`),
-        favicon: path.join(__dirname, `../client/favicon.ico`)
+        public: path.join(__dirname, `public`),
+        client: path.join(__dirname, `client`),
+        server: path.join(__dirname, `server`),
+        favicon: path.join(__dirname, `client/favicon.ico`)
     }
 };
