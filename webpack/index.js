@@ -10,7 +10,7 @@ import css from './includes/css';
 import js from './includes/js';
 import jsUglify from './includes/js.uglify';
 import pug from './includes/pug';
-import devServer from './includes/devServer';
+import devServer from './includes/devserver';
 
 const common = merge([
     {
